@@ -1,0 +1,21 @@
+{
+  "game_title": " SNAKE ",
+  "new_game": "Nytt spel",
+  "game_over_title": "Spel över",
+  "game_over_crumbs": "Ditt spel är slut, men du spelade bra. Din poäng blev {score}.",
+  "@game_over_crumbs": {
+    "description": "Game over breadcrumbs text",
+    "placeholders": {
+      "score": { "type": "int" }
+    }
+  },
+  "restart": "Starta om",
+  "score": "Poäng: {points}",
+  "@score": {
+    "description": "The score text",
+    "placeholders": {
+      "points": { "type": "int" }
+    }
+  },
+  "main_menu": "Huvudmeny"
+}
