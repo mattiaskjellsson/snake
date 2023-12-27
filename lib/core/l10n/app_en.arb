@@ -1,5 +1,5 @@
 {
-  "game_title": "Snake",
+  "game_title": " SNAKE ",
   "new_game": "New game",
   "game_over_title": "Game Over",
   "game_over_crumbs": "Your game is over but you played well. Your score is {score}.",
@@ -16,5 +16,6 @@
     "placeholders": {
       "points": { "type": "int" }
     }
-  }
+  },
+  "main_menu": "Main menu"
 }

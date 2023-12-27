@@ -9,6 +9,7 @@ import 'package:snake/core/theme.dart';
 import 'package:snake/features/game/widgets/control_panel.dart';
 import 'package:snake/features/game/widgets/piece.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:uuid/uuid.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -85,22 +86,32 @@ class _GamePageState extends State<GamePage> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.gameOverBackground,
           shape: RoundedRectangleBorder(
               side: BorderSide(
-                color: Colors.black,
-                width: 3.0,
+                color: AppColors.gameOverBorder,
+                width: AppSizes.gameOverBorder,
               ),
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
           title: Text(
             AppLocalizations.of(context)!.game_over_title,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.gameOverTitle),
           ),
           content: Text(
             AppLocalizations.of(context)!.game_over_crumbs(score),
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.gameOverText),
           ),
           actions: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                AppLocalizations.of(context)!.main_menu,
+                style: TextStyle(color: AppColors.gameOverMainMenu, fontWeight: FontWeight.bold),
+              )
+            ),
             OutlinedButton(
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -108,7 +119,7 @@ class _GamePageState extends State<GamePage> {
               },
               child: Text(
                 AppLocalizations.of(context)!.restart,
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(color: AppColors.gameOverRestart, fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -158,7 +169,7 @@ class _GamePageState extends State<GamePage> {
       posX: foodPosition!.dx.toInt(),
       posY: foodPosition!.dy.toInt(),
       size: step,
-      color: Color(0XFF8EA604),
+      color: AppColors.food,
       isAnimated: true,
     );
   }
@@ -178,7 +189,7 @@ class _GamePageState extends State<GamePage> {
           posX: positions[i].dx.toInt(),
           posY: positions[i].dy.toInt(),
           size: step,
-          color: Colors.red,
+          color: AppColors.snake,
         ),
       );
     }
@@ -220,7 +231,7 @@ class _GamePageState extends State<GamePage> {
       right: AppSizes.scoreRightOffset,
       child: Text(
         AppLocalizations.of(context)!.score(score),
-        style: TextStyle(fontSize: 24.0),
+        style: TextStyle(fontSize: AppSizes.scoreText),
       ),
     );
   }
@@ -243,9 +254,9 @@ class _GamePageState extends State<GamePage> {
         height: (upperBoundY! - lowerBoundY! + step).toDouble(),
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.black.withOpacity(0.2),
+            color: AppColors.white.withOpacity(AppOpacities.fieldBorder),
             style: BorderStyle.solid,
-            width: 1.0,
+            width: AppSizes.fieldBorder,
           ),
         ),
       ),
@@ -270,8 +281,9 @@ class _GamePageState extends State<GamePage> {
     upperBoundY = roundToNearestTens(screenHeight!.toInt() - step);
 
     return Scaffold(
+      // key: Key(Uuid().v1().toString()),
       body: Container(
-        color: Color(0XFFF5BB00),
+        color: AppColors.dark,
         child: Stack(
           children: [
             getPlayAreaBorder(),

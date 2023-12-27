@@ -17,6 +17,7 @@ dependencies:
   intl: ^0.18.1
   flutter_native_splash: ^2.3.8
   icons_launcher: ^2.1.6
+  uuid: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +26,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  assets:
+    - assets/snake_icon.png
+    - assets/snake_splash.png
+    - assets/snake_android12_splash.png
 
 icons_launcher:
   # dart run icons_launcher:create
