@@ -10,6 +10,8 @@ class AppConstants {
 
 class AppSizes {
   static const zero = 0.0;
+  static const menuImageWidth = 200.0;
+  static const menuImageHeight = 200.0;
   static const fieldBorder = 1.0;
   static const gameTitle = 24.0;
   static const gameTitleSpacing = 10.0;

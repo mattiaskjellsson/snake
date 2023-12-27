@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:snake/core/theme.dart';
 import 'package:snake/features/game/game.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:uuid/uuid.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -10,7 +9,6 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // key: Key(Uuid().v1().toString()),
       backgroundColor: AppColors.dark,
       body: Center(
         child: Column(
@@ -18,8 +16,8 @@ class MainMenu extends StatelessWidget {
             SizedBox(height: AppSizes.mainMenuTopOffset),
             Image.asset(
               'assets/snake_icon.png',
-              width: 200,
-              height: 200,
+              width: AppSizes.menuImageWidth,
+              height: AppSizes.menuImageHeight,
               fit: BoxFit.contain,
             ),
             Text(
