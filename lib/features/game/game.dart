@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:snake/core/direction.dart';
 import 'package:snake/core/direction_type.dart';
 import 'package:snake/core/theme.dart';
 import 'package:snake/features/game/widgets/control_panel.dart';
 import 'package:snake/features/game/widgets/piece.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:uuid/uuid.dart';
+import 'package:snake/features/game/widgets/play_area_border.dart';
+import 'package:snake/features/game/widgets/score.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -197,14 +197,6 @@ class _GamePageState extends State<GamePage> {
     return pieces;
   }
 
-  Widget getControls() {
-    return ControlPanel(
-      onTapped: (Direction newDirection) {
-        direction = newDirection;
-      },
-    );
-  }
-
   int roundToNearestTens(int num) {
     int divisor = step;
     int output = (num ~/ divisor) * divisor;
@@ -225,17 +217,6 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  Widget getScore() {
-    return Positioned(
-      top: AppSizes.scoreTopOffset,
-      right: AppSizes.scoreRightOffset,
-      child: Text(
-        AppLocalizations.of(context)!.score(score),
-        style: TextStyle(fontSize: AppSizes.scoreText),
-      ),
-    );
-  }
-
   void restart() {
     score = 0;
     length = AppConstants.initialLength;
@@ -243,24 +224,6 @@ class _GamePageState extends State<GamePage> {
     direction = getRandomDirection();
     speed = AppConstants.initialSpeed;
     changeSpeed();
-  }
-
-  Widget getPlayAreaBorder() {
-    return Positioned(
-      top: lowerBoundY!.toDouble(),
-      left: lowerBoundX!.toDouble(),
-      child: Container(
-        width: (upperBoundX! - lowerBoundX! + step).toDouble(),
-        height: (upperBoundY! - lowerBoundY! + step).toDouble(),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors.white.withOpacity(AppOpacities.fieldBorder),
-            style: BorderStyle.solid,
-            width: AppSizes.fieldBorder,
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -281,20 +244,29 @@ class _GamePageState extends State<GamePage> {
     upperBoundY = roundToNearestTens(screenHeight!.toInt() - step);
 
     return Scaffold(
-      // key: Key(Uuid().v1().toString()),
       body: Container(
         color: AppColors.dark,
         child: Stack(
           children: [
-            getPlayAreaBorder(),
+            PlayAreaBorder(
+              lowerBoundY: lowerBoundY!,
+              lowerBoundX: lowerBoundX!,
+              upperBoundX: upperBoundX!,
+              upperBoundY: upperBoundY!,
+              step: step
+            ),
             Container(
               child: Stack(
                 children: getPieces(),
               ),
             ),
             food!,
-            getControls(),
-            getScore(),
+            ControlPanel(
+              onTapped: (Direction newDirection) {
+                direction = newDirection;
+              },
+            ),
+            Score(score: score),
           ],
         ),
       ),
