@@ -1,0 +1,20 @@
+{
+  "game_title": "Snake",
+  "new_game": "New game",
+  "game_over_title": "Game Over",
+  "game_over_crumbs": "Your game is over but you played well. Your score is {score}.",
+  "@game_over_crumbs": {
+    "description": "Game over breadcrumbs text",
+    "placeholders": {
+      "score": { "type": "int" }
+    }
+  },
+  "restart": "Restart",
+  "score": "Score: {points}",
+  "@score": {
+    "description": "The score text",
+    "placeholders": {
+      "points": { "type": "int" }
+    }
+  }
+}

@@ -8,6 +8,7 @@ import 'package:snake/core/direction_type.dart';
 import 'package:snake/core/theme.dart';
 import 'package:snake/features/game/widgets/control_panel.dart';
 import 'package:snake/features/game/widgets/piece.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -92,11 +93,11 @@ class _GamePageState extends State<GamePage> {
               ),
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
           title: Text(
-            "Game Over",
+            AppLocalizations.of(context)!.game_over_title,
             style: TextStyle(color: Colors.white),
           ),
           content: Text(
-            "Your game is over but you played well. Your score is " + score.toString() + ".",
+            AppLocalizations.of(context)!.game_over_crumbs(score),
             style: TextStyle(color: Colors.white),
           ),
           actions: [
@@ -106,7 +107,7 @@ class _GamePageState extends State<GamePage> {
                 restart();
               },
               child: Text(
-                "Restart",
+                AppLocalizations.of(context)!.restart,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
@@ -196,6 +197,7 @@ class _GamePageState extends State<GamePage> {
   int roundToNearestTens(int num) {
     int divisor = step;
     int output = (num ~/ divisor) * divisor;
+
     if (output == 0) {
       output += step;
     }
@@ -207,7 +209,6 @@ class _GamePageState extends State<GamePage> {
       timer!.cancel();
     }
 
-    // if you want timer to tick at fixed duration.
     timer = Timer.periodic(Duration(milliseconds: AppDurations.gameTick ~/ speed), (timer) {
       setState(() {});
     });
@@ -218,7 +219,7 @@ class _GamePageState extends State<GamePage> {
       top: AppSizes.scoreTopOffset,
       right: AppSizes.scoreRightOffset,
       child: Text(
-        "Score: " + score.toString(),
+        AppLocalizations.of(context)!.score(score),
         style: TextStyle(fontSize: 24.0),
       ),
     );
